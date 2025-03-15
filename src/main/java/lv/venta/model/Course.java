@@ -1,11 +1,14 @@
 package lv.venta.model;
 
+import java.util.Collection;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.Max;
@@ -47,6 +50,14 @@ public class Course {
 	@OneToOne
 	@JoinColumn(name = "PId")//izveidos kursa tabulā papildus kolonu PiD, kas sasaistīs profesoru ar kursu
 	private Professor professor;
+	
+	@OneToMany(mappedBy = "course")
+	@ToString.Exclude
+	private Collection<Grade> grades;
+	
+	
+	
+	
 	
 	public Course(String title, int creditpoints, Professor professor) {
 		setTitle(title);

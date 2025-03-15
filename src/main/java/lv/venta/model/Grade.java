@@ -38,7 +38,8 @@ public class Grade {
 	@JoinColumn(name = "StId")
 	private Student student;
 	
-	//TODO uztaisīt sasaisti ar Course klasi
+	@ManyToOne
+	@JoinColumn(name = "CId")
 	private Course course;
 	
 }
