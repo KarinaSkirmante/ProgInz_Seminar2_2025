@@ -5,7 +5,6 @@ import java.util.ArrayList;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import lv.venta.model.Product;
 import lv.venta.model.Professor;
 import lv.venta.model.enums.Degree;
 import lv.venta.repo.IProfessorRepo;
