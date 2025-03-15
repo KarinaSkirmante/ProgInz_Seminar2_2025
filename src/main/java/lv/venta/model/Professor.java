@@ -14,19 +14,20 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
+import lv.venta.model.enums.Degree;
 
 @Getter
 @Setter
 @NoArgsConstructor
 @ToString
-@Table(name = "StudentTable")//MYSQL - student_table
+@Table(name = "ProfessorTable") //MYSQL - professor_table
 @Entity
-public class Student {
+public class Professor {
 	@Setter(value = AccessLevel.NONE)
 	@Id
-	@Column(name = "StId")
+	@Column(name = "PId")
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	private int stId;
+	private int pId;
 	
 	@NotNull
 	@Pattern(regexp = "[A-ZĒŪĪĻĶĢŠĀČŅ]{1}[a-zēūīļķģšāžčņ]+")
@@ -40,8 +41,18 @@ public class Student {
 	@Column(name = "Surname")
 	private String surname;
 	
-	public Student(String name, String surname) {
+	
+	@NotNull
+	@Column(name = "Degree")
+	private Degree degree;
+	
+	
+	public Professor(String name, String surname, Degree degree) {
 		setName(name);
 		setSurname(surname);
+		setDegree(degree);
 	}
+	
+	
+	
 }
