@@ -29,7 +29,7 @@ import lombok.ToString;
 public class Course {
 	@Setter(value = AccessLevel.NONE)
 	@Id
-	@Column(name = "cId")
+	@Column(name = "CId")
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int cId;
 	
