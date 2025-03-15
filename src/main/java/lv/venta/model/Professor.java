@@ -15,6 +15,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 import lv.venta.model.enums.Degree;
+import jakarta.persistence.OneToOne;
 
 @Getter
 @Setter
@@ -45,6 +46,15 @@ public class Professor {
 	@NotNull
 	@Column(name = "Degree")
 	private Degree degree;
+	
+	
+	@OneToOne(mappedBy = "professor")//nodrosinām sasaisti JAVA līmenī - otras klases mainīgā nosaukums
+	@ToString.Exclude
+	private Course course;
+	
+	
+	
+	
 	
 	
 	public Professor(String name, String surname, Degree degree) {
