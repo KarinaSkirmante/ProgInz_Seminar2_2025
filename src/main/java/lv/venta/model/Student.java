@@ -27,7 +27,7 @@ import lombok.ToString;
 public class Student {
 	@Setter(value = AccessLevel.NONE)
 	@Id
-	@Column(name = "StId")
+	@Column(name = "Stid")
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int stId;
 	
