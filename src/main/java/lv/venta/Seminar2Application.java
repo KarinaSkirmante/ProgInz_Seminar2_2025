@@ -43,6 +43,7 @@ public class Seminar2Application {
 				Professor p1 = new Professor("Karina", "Šķirmante", Degree.magistra);
 				Professor p2 = new Professor("Kārlis", "Immers", Degree.magistra);
 				Professor p3 = new Professor("Vija", "Vagale", Degree.doktora);
+				Professor p4 = new Professor("Raita", "Rollande", Degree.doktora);
 				
 				//garais pieraksts
 				/*
@@ -51,13 +52,21 @@ public class Seminar2Application {
 				profRepo.save(p3);
 				*/
 				//īsais pieraksts
-				profRepo.saveAll((Arrays.asList(p1, p2, p3)));
+				profRepo.saveAll((Arrays.asList(p1, p2, p3, p4)));
 			
-				Course c1 = new Course("Programmatūras Inženierija I", 6, p1);
+				Course c1 = new Course("Programmatūras Inženierija I", 6, p1, p4);//pasniedz gan Karina, gan Raita
 				Course c2 = new Course("Datubāzes II", 3, p3);
 				Course c3 = new Course("Web tehnoloģijas", 6, p2);
+				Course c4 = new Course("Datu Struktūras un algoritmi", 3, p1);
+				courseRepo.saveAll(Arrays.asList(c1, c2, c3, c4));
 				
-				courseRepo.saveAll(Arrays.asList(c1, c2, c3));
+				
+				p1.addCourse(c1);
+				p1.addCourse(c4);
+				p2.addCourse(c3);
+				p3.addCourse(c2);
+				p4.addCourse(c1);
+				profRepo.saveAll((Arrays.asList(p1, p2, p3, p4)));
 				
 				Grade g1 = new Grade(6, s1, c1);//Konstantīns nopelnīja 6 ProgInz I
 				Grade g2 = new Grade(9, s1, c2);//Konstantīns nopelnīja 9 Datubāzēs II
