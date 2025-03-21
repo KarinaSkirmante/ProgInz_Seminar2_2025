@@ -13,6 +13,7 @@ import lv.venta.service.ICRUDProfessorService;
 @Service
 public class CRUDProfessorServiceImpl implements ICRUDProfessorService{
 
+	//TODO uztaisīt arī CRUD servisus priekš Student, Grade un Course
 	@Autowired
 	private IProfessorRepo profRepo;
 	
@@ -51,13 +52,33 @@ public class CRUDProfessorServiceImpl implements ICRUDProfessorService{
 
 	@Override
 	public void create(String name, String surname, Degree degree) throws Exception {
-		// TODO Auto-generated method stub
+		if(name == null || surname == null || degree == null)
+		{
+			throw new Exception("Ievades parametri nav pareizi");
+		}
+		
+		if(profRepo.existsByNameAndSurnameAndDegree(name, surname, degree))
+		{
+			throw new Exception("Tāds profesors jau eksistē");
+		}
+		
+		Professor newProfessor = new Professor(name, surname, degree);
+		profRepo.save(newProfessor);
 		
 	}
 
 	@Override
 	public void updateById(int id, String name, String surname, Degree degree) throws Exception {
-		// TODO Auto-generated method stub
+		if(name == null || surname == null || degree == null)
+		{
+			throw new Exception("Ievades parametri nav pareizi");
+		}
+		Professor retrievedProf = retreiveById(id);
+		retrievedProf.setName(name);
+		retrievedProf.setSurname(surname);
+		retrievedProf.setDegree(degree);
+		profRepo.save(retrievedProf);
+		
 		
 	}
 
