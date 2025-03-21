@@ -1,5 +1,6 @@
 package lv.venta.model;
 
+import java.util.ArrayList;
 import java.util.Collection;
 
 import jakarta.persistence.Column;
@@ -8,6 +9,8 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
+import jakarta.persistence.JoinTable;
+import jakarta.persistence.ManyToMany;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
@@ -46,10 +49,21 @@ public class Course {
 	@Min(0)
 	@Max(30)
 	private int creditpoints;
-	
+	//piemeram par saiti viens-pret-viens
+	/*
 	@OneToOne
 	@JoinColumn(name = "PId")//izveidos kursa tabulā papildus kolonu PiD, kas sasaistīs profesoru ar kursu
 	private Professor professor;
+	*/
+	
+	@ManyToMany
+	@JoinTable(name = "CourseProfessorTable", 
+	joinColumns = @JoinColumn(name = "PId"),
+	inverseJoinColumns = @JoinColumn(name = "CId"))//MYSQL - course_professor_table
+	private Collection<Professor> professors = new ArrayList<Professor>();
+	
+	
+	
 	
 	@OneToMany(mappedBy = "course")
 	@ToString.Exclude
