@@ -69,6 +69,11 @@ public class Professor {
 		setDegree(degree);
 	}
 	
-	
+	public void addCourse(Course course) {
+		if(!courses.contains(course)) {
+			courses.add(course);
+		}
+	}
+	//TODO uztaisīt arī removeCourse
 	
 }

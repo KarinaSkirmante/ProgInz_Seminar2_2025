@@ -73,10 +73,20 @@ public class Course {
 	
 	
 	
-	public Course(String title, int creditpoints, Professor professor) {
+	public Course(String title, int creditpoints, Professor ... professors) {
 		setTitle(title);
 		setCreditpoints(creditpoints);
-		setProfessor(professor);
+		for(Professor tempP : professors) {
+			addProfessor(tempP);
+		}
 	}
+	
+	public void addProfessor(Professor professor) {
+		if(!professors.contains(professor)) {
+			professors.add(professor);
+		}
+	}
+	
+	//TODO uztaisīt removeProfessor funkciju
 	
 }
