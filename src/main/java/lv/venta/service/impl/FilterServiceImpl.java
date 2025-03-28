@@ -9,6 +9,7 @@ import lv.venta.model.Course;
 import lv.venta.model.Grade;
 import lv.venta.repo.ICourseRepo;
 import lv.venta.repo.IGradeRepo;
+import lv.venta.repo.IProfessorRepo;
 import lv.venta.repo.IStudentRepo;
 import lv.venta.service.IFilterService;
 
@@ -24,9 +25,12 @@ public class FilterServiceImpl implements IFilterService {
 	@Autowired
 	private ICourseRepo couRepo;
 	
+	@Autowired
+	private IProfessorRepo profRepo;
+	
 	@Override
 	public ArrayList<Grade> selectGradesByStudentId(int id) throws Exception {
-		if(id < 0){
+		if(id <= 0){
 			throw new Exception("Id nevar būt negatīvs");
 		}
 		
@@ -45,7 +49,7 @@ public class FilterServiceImpl implements IFilterService {
 
 	@Override
 	public ArrayList<Course> selectCoursesByStudentId(int id) throws Exception {
-		if(id < 0){
+		if(id <= 0){
 			throw new Exception("Id nevar būt negatīvs");
 		}
 		
@@ -64,8 +68,22 @@ public class FilterServiceImpl implements IFilterService {
 
 	@Override
 	public ArrayList<Course> selectCoursesByProfessorId(int id) throws Exception {
-		// TODO Auto-generated method stub
-		return null;
+		if(id <= 0){
+			throw new Exception("Id nevar būt negatīvs");
+		}
+		
+		if(!profRepo.existsById(id)) {
+			throw new Exception("Professors ar id: " + id + " neeksistē");
+		}
+		
+		ArrayList<Course> result = couRepo.findByProfessorPId(id);
+		
+		if(result.isEmpty()) {
+			throw new Exception("Professoram ar id: " + id + " nav piesaistīts neviens kurss");
+		}
+		
+		
+		return result;
 	}
 
 	@Override

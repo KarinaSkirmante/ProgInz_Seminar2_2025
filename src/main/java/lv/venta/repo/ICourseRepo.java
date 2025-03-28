@@ -10,4 +10,6 @@ public interface ICourseRepo extends CrudRepository<Course, Integer>{
 
 	public abstract ArrayList<Course> findByGradesStudentStId(int id);
 
+	public abstract ArrayList<Course> findByProfessorPId(int id);
+
 }
