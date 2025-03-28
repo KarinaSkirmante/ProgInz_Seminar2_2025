@@ -27,7 +27,7 @@ public class Grade {
 	@Id
 	@Column(name = "GId")
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	private int gId;
+	private int gid;
 	
 	@Column(name = "Grvalue")
 	@Min(1)

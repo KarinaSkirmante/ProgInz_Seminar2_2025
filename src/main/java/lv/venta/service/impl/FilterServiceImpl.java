@@ -39,7 +39,7 @@ public class FilterServiceImpl implements IFilterService {
 			throw new Exception("Students ar id: " + id + " neeksistē");
 		}
 		
-		ArrayList<Grade> result = grRepo.findByStudentStId(id);
+		ArrayList<Grade> result = grRepo.findByStudentStid(id);
 		
 		if(result.isEmpty()) {
 			throw new Exception("Studentam ar id: " + id + " nav piesaistīta ne viena atzīme");
@@ -58,7 +58,7 @@ public class FilterServiceImpl implements IFilterService {
 			throw new Exception("Students ar id: " + id + " neeksistē");
 		}
 		
-		ArrayList<Course> result = couRepo.findByGradesStudentStId(id);
+		ArrayList<Course> result = couRepo.findByGradesStudentStid(id);
 		if(result.isEmpty()) {
 			throw new Exception("Studentam ar id: " + id + " nav piesaistīts ne viens kurss");
 		}
@@ -77,7 +77,7 @@ public class FilterServiceImpl implements IFilterService {
 			throw new Exception("Professors ar id: " + id + " neeksistē");
 		}
 		
-		ArrayList<Course> result = couRepo.findByProfessorPId(id);
+		ArrayList<Course> result = couRepo.findByProfessorPid(id);
 		
 		if(result.isEmpty()) {
 			throw new Exception("Professoram ar id: " + id + " nav piesaistīts neviens kurss");

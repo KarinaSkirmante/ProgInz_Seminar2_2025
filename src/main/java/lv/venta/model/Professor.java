@@ -28,7 +28,7 @@ public class Professor {
 	@Id
 	@Column(name = "PId")
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	private int pId;
+	private int pid;
 	
 	@NotNull
 	@Pattern(regexp = "[A-ZĒŪĪĻĶĢŠĀČŅ]{1}[a-zēūīļķģšāžčņ]+")
