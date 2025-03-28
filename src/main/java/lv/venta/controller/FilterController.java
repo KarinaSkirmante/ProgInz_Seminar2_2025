@@ -21,7 +21,7 @@ public class FilterController {
 	
 	//TODO
 	//izveidot Getmapping 
-	@GetMapping("/grades/student/{id}")
+	@GetMapping("/grades/student/{id}")//localhost:8080/filter/grades/student/1
 	public String getControllerGetAllGradesForStudent(@PathVariable (name = "id") int id, Model model)
 	{
 		try
