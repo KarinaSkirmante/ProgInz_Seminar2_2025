@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import lv.venta.model.Course;
 import lv.venta.model.Grade;
+import lv.venta.model.Student;
 import lv.venta.repo.ICourseRepo;
 import lv.venta.repo.IGradeRepo;
 import lv.venta.repo.IProfessorRepo;
@@ -88,8 +89,31 @@ public class FilterServiceImpl implements IFilterService {
 
 	@Override
 	public float calculateAVGGradeInCourseId(int id) throws Exception {
-		// TODO Auto-generated method stub
-		return 0;
+		if(id <= 0){
+			throw new Exception("Id nevar būt negatīvs");
+		}
+		
+		if(!couRepo.existsById(id)) {
+			throw new Exception("Kurss ar id: " + id + " neeksistē");
+		}
+		
+		float result = grRepo.calculateAVGgradeInCourse(id);
+		if(result == 0)
+		{
+			throw new Exception("Kursam ar id: " + id + " nav piesaistīts neviena atzīme");
+		}
+		
+		return result;
+	}
+
+	@Override
+	public ArrayList<Student> selectAllStudentsWithFailedGrades() throws Exception {
+		ArrayList<Student> result = studRepo.findByGradesGrvalueLessThan(4);
+		if(result.isEmpty()) {
+			throw new Exception("Datubāze nav neviens stuents ar nesekmīgu atzīmi");
+		}
+		
+		return result;
 	}
 
 }
