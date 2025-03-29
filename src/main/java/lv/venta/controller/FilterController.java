@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import lv.venta.model.Course;
 import lv.venta.model.Grade;
+import lv.venta.model.Student;
 import lv.venta.service.IFilterService;
 
 @Controller
@@ -67,19 +68,37 @@ public class FilterController {
 		
 	}
 	
-	
-	
-	//TODO
-	//getmapping
-	//funkcijas deklarācija
-	//izsaukt atbilstošo servisa funkciju -> selectCoursesByProfessorId
-	//uztaisīt try un catch bloku
-	//catch bloka caur model.addatribute padot izņemuma ziņu
-	//parādīt show-error-lapu
-	//try bloka pēc selectCoursesByProfessorId izsaukuma ar model.addAtribute ielikt atlasītos datus
-	//parādīt show-courses-page
+	@GetMapping("/grades/avg/course/{id}")//localhost:8080/filter/grades/avg/course/1
+	public String getControllerGetAvgGradeInCourse(@PathVariable(name = "id") int id, Model model)
+	{
+		try
+		{
+			float avgGrade = filtService.calculateAVGGradeInCourseId(id);
+			model.addAttribute("package", ("Vidējā atzīmju vērtība ir " + avgGrade));
+			return "data-page";//parādīs data-page.html lapu ar vidējo vērtību konkrētajā kursā
+		}
+		catch (Exception e) {
+			model.addAttribute("package", e.getMessage());
+			return "show-error-page";//parādīt show-error-page.html lapu, kura būs kļudas ziņojums
 
-	//izveidot show-courses-page lapu
+		}
+		
+	}
+	
+	@GetMapping("/students/failed")//localhost:8080/filter/students/failed
+	public String getControllergetFailedStudents(Model model)
+	{
+		try
+		{
+			ArrayList<Student> failedStudents = filtService.selectAllStudentsWithFailedGrades();
+			model.addAttribute("package", failedStudents);
+			return "show-students-page";//parādīs show-students-page.html lapu ar izfiltrētajiem studentiem
+		}
+		catch (Exception e) {
+			model.addAttribute("package", e.getMessage());
+			return "show-error-page";//parādīt show-error-page.html lapu, kura būs kļudas ziņojums
+		}
+	}
 	
 	
 }
