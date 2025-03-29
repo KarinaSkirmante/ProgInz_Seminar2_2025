@@ -25,7 +25,7 @@ import lombok.ToString;
 
 @Table(name = "PersonTable")
 @Entity
-@Inheritance(strategy = InheritanceType.JOINED)
+@Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
 public class Person {
 	
 	@Setter(value = AccessLevel.NONE)
