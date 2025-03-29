@@ -31,17 +31,7 @@ public class Student {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int stid;
 	
-	@NotNull
-	@Pattern(regexp = "[A-ZĒŪĪĻĶĢŠĀČŅ]{1}[a-zēūīļķģšāžčņ]+")
-	@Size(min = 3, max = 20)
-	@Column(name = "Name")
-	private String name;
-	
-	@NotNull
-	@Pattern(regexp = "[A-ZĒŪĪĻĶĢŠĀČŅ]{1}[a-zēūīļķģšāžčņ]+")
-	@Size(min = 3, max = 25)
-	@Column(name = "Surname")
-	private String surname;
+
 	
 	@OneToMany(mappedBy = "student")
 	@ToString.Exclude

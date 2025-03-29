@@ -30,17 +30,7 @@ public class Professor {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int pid;
 	
-	@NotNull
-	@Pattern(regexp = "[A-ZĒŪĪĻĶĢŠĀČŅ]{1}[a-zēūīļķģšāžčņ]+")
-	@Size(min = 3, max = 20)
-	@Column(name = "Name")
-	private String name;
-	
-	@NotNull
-	@Pattern(regexp = "[A-ZĒŪĪĻĶĢŠĀČŅ]{1}[a-zēūīļķģšāžčņ]+")
-	@Size(min = 3, max = 25)
-	@Column(name = "Surname")
-	private String surname;
+
 	
 	
 	@NotNull
