@@ -50,18 +50,33 @@ public class FilterController {
 		}
 		
 	}
-	
+	@GetMapping("/courses/professor/{id}")//localhost:8080/filter/courses/professor/1
+	public String getControllerGetAllCoursesForprofessor(@PathVariable(name = "id") int id, Model model)
+	{
+		try
+		{
+			ArrayList<Course> filteredCourses = filtService.selectCoursesByProfessorId(id);
+			model.addAttribute("package", filteredCourses);
+			return "show-courses-page";//parādīs show-courses-page.html lapu ar izfiltrētime kursiem
+		}
+		catch (Exception e) {
+			model.addAttribute("package", e.getMessage());
+			return "show-error-page";//parādīt show-error-page.html lapu, kura būs kļudas ziņojums
+
+		}
+		
+	}
 	
 	
 	
 	//TODO
 	//getmapping
 	//funkcijas deklarācija
-	//izsaukt atbilstošo servisa funkciju -> selectCoursesByStudentId
+	//izsaukt atbilstošo servisa funkciju -> selectCoursesByProfessorId
 	//uztaisīt try un catch bloku
-	//catch bloka caur moedl.addatribute padot izņemuma ziņu
+	//catch bloka caur model.addatribute padot izņemuma ziņu
 	//parādīt show-error-lapu
-	//try bloka pēc selectCoursesByStudentId izsaukuma ar model.addAtribute ielikt atlasītos datus
+	//try bloka pēc selectCoursesByProfessorId izsaukuma ar model.addAtribute ielikt atlasītos datus
 	//parādīt show-courses-page
 
 	//izveidot show-courses-page lapu
