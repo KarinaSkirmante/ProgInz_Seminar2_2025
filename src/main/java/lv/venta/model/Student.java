@@ -22,7 +22,7 @@ import lombok.ToString;
 @Setter
 @NoArgsConstructor
 @ToString
-@Table(name = "StudentTable")//MYSQL - student_table
+//@Table(name = "StudentTable")//MYSQL - student_table <- nevajag @Table, ja ir SINGLE_TABLE inheritance startēģija
 @Entity
 public class Student extends Person{
 	

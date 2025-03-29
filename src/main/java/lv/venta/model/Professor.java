@@ -21,7 +21,7 @@ import jakarta.persistence.OneToOne;
 @Setter
 @NoArgsConstructor
 @ToString
-@Table(name = "ProfessorTable") //MYSQL - professor_table
+//@Table(name = "ProfessorTable") //MYSQL - professor_table <- nevajag @Table, ja ir SINGLE_TABLE inheritance startēģija
 @Entity
 public class Professor extends Person{
 	
