@@ -24,26 +24,18 @@ import lombok.ToString;
 @ToString
 @Table(name = "StudentTable")//MYSQL - student_table
 @Entity
-public class Student {
+public class Student extends Person{
 	@Setter(value = AccessLevel.NONE)
 	@Id
 	@Column(name = "Stid")
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int stid;
 	
-
-	
 	@OneToMany(mappedBy = "student")
 	@ToString.Exclude
 	private Collection<Grade> grades;
 	
-	
-	
-	
-	
-	
 	public Student(String name, String surname) {
-		setName(name);
-		setSurname(surname);
+		super(name, surname);
 	}
 }

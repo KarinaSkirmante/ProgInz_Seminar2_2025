@@ -23,33 +23,23 @@ import jakarta.persistence.OneToOne;
 @ToString
 @Table(name = "ProfessorTable") //MYSQL - professor_table
 @Entity
-public class Professor {
+public class Professor extends Person{
 	@Setter(value = AccessLevel.NONE)
 	@Id
 	@Column(name = "PId")
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int pid;
 	
-
-	
-	
 	@NotNull
 	@Column(name = "Degree")
 	private Degree degree;
-	
 	
 	@OneToOne(mappedBy = "professor")//nodrosinām sasaisti JAVA līmenī - otras klases mainīgā nosaukums
 	@ToString.Exclude
 	private Course course;
 	
-	
-	
-	
-	
-	
 	public Professor(String name, String surname, Degree degree) {
-		setName(name);
-		setSurname(surname);
+		super(name, surname);
 		setDegree(degree);
 	}
 	
