@@ -19,8 +19,6 @@ public class FilterController {
 	@Autowired
 	private IFilterService filtService;
 	
-	//TODO
-	//izveidot Getmapping 
 	@GetMapping("/grades/student/{id}")//localhost:8080/filter/grades/student/1
 	public String getControllerGetAllGradesForStudent(@PathVariable (name = "id") int id, Model model)
 	{
@@ -35,15 +33,17 @@ public class FilterController {
 		}
 	}
 
-	//izsaukt atbilstošo servisa funkciju -> selectGradesByStudentId
+	//TODO
+	//getmapping
+	//funkcijas deklarācija
+	//izsaukt atbilstošo servisa funkciju -> selectCoursesByStudentId
 	//uztaisīt try un catch bloku
 	//catch bloka caur moedl.addatribute padot izņemuma ziņu
 	//parādīt show-error-lapu
-	//try bloka pēc selectGradesByStudentId izsaukuma ar model.addAtribute ielikt atlasītos datus
-	//parādīt show-course-page
-	
-	//izveidot show-error-page lapu
-	//izveidot show-course-page lapu
+	//try bloka pēc selectCoursesByStudentId izsaukuma ar model.addAtribute ielikt atlasītos datus
+	//parādīt show-courses-page
+
+	//izveidot show-courses-page lapu
 	
 	
 }
