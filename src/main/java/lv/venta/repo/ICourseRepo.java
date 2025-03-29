@@ -8,8 +8,8 @@ import lv.venta.model.Course;
 
 public interface ICourseRepo extends CrudRepository<Course, Integer>{
 
-	public abstract ArrayList<Course> findByGradesStudentStid(int id);
+	public abstract ArrayList<Course> findByGradesStudentPeid(int id);
 
-	public abstract ArrayList<Course> findByProfessorPid(int id);
+	public abstract ArrayList<Course> findByProfessorPeid(int id);
 
 }

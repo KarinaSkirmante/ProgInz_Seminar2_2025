@@ -24,11 +24,6 @@ import jakarta.persistence.OneToOne;
 @Table(name = "ProfessorTable") //MYSQL - professor_table
 @Entity
 public class Professor extends Person{
-	@Setter(value = AccessLevel.NONE)
-	@Id
-	@Column(name = "PId")
-	@GeneratedValue(strategy = GenerationType.AUTO)
-	private int pid;
 	
 	@NotNull
 	@Column(name = "Degree")

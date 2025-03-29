@@ -25,11 +25,6 @@ import lombok.ToString;
 @Table(name = "StudentTable")//MYSQL - student_table
 @Entity
 public class Student extends Person{
-	@Setter(value = AccessLevel.NONE)
-	@Id
-	@Column(name = "Stid")
-	@GeneratedValue(strategy = GenerationType.AUTO)
-	private int stid;
 	
 	@OneToMany(mappedBy = "student")
 	@ToString.Exclude
