@@ -45,6 +45,7 @@ public class CRUDProfessorServiceImpl implements ICRUDProfessorService{
 
 	@Override
 	public void deleteById(int id) throws Exception {
+		//TODO atsaistēt profesoru no kursiem, kam tas ir piesaistīts
 		Professor professorForDelete = retreiveById(id);
 		profRepo.delete(professorForDelete);
 	

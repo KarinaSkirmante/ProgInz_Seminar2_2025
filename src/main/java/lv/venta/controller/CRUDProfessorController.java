@@ -81,4 +81,54 @@ public class CRUDProfessorController {
 	}
 	
 	
+	@GetMapping("/update/{id}")
+	public String getUpdateProfessorById(@PathVariable(name="id") int id, Model model) {
+		try
+		{
+			Professor profForUpdating = profService.retreiveById(id);
+			model.addAttribute("professor", profForUpdating);
+			return "update-professor";
+		}
+		catch (Exception e) {
+			model.addAttribute("package", e.getMessage());
+			return "show-error-page";
+		}
+		
+	}
+	@PostMapping("/update/{id}")
+	public String postUpdateProfessorById(@Valid Professor professor, BindingResult result,
+			Model model, @PathVariable(name = "id") int id) {
+		if(result.hasErrors()) {
+			return "update-professor";
+		}
+		else
+		{
+			try
+			{
+				profService.updateById(id, professor.getName(), professor.getSurname(), professor.getDegree());
+				return "redirect:/crud/professor/all/" + id;
+			}
+			catch (Exception e) {
+				model.addAttribute("package", e.getMessage());
+				return "show-error-page";
+			}
+		}
+	}
+	
+	
+	@GetMapping("/delete/{id}")
+	public String getDeleteProfessorById( @PathVariable(name = "id") int id, Model model) {
+		try
+		{
+			profService.deleteById(id);
+			ArrayList<Professor> allProfessors = profService.retrieveAll();
+			model.addAttribute("professors", allProfessors);
+			return "show-all-professors-page";
+		}
+		catch (Exception e) {
+			model.addAttribute("package", e.getMessage());
+			return "show-error-page";
+		}
+	}
+	
 }
