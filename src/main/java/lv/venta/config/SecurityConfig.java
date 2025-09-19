@@ -64,7 +64,5 @@ public class SecurityConfig {
 	}
 	
 	
-	//MyAutority - id, title
-	//MyUser - id, username, password
 
 }

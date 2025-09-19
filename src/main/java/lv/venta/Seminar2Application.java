@@ -7,14 +7,20 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
+import org.springframework.security.crypto.factory.PasswordEncoderFactories;
+import org.springframework.security.crypto.password.PasswordEncoder;
 
 import lv.venta.model.Course;
 import lv.venta.model.Grade;
+import lv.venta.model.MyAuthority;
+import lv.venta.model.MyUser;
 import lv.venta.model.Professor;
 import lv.venta.model.Student;
 import lv.venta.model.enums.Degree;
 import lv.venta.repo.ICourseRepo;
 import lv.venta.repo.IGradeRepo;
+import lv.venta.repo.IMyAuthorityRepo;
+import lv.venta.repo.IMyUserRepo;
 import lv.venta.repo.IProfessorRepo;
 import lv.venta.repo.IStudentRepo;
 
@@ -26,7 +32,8 @@ public class Seminar2Application {
 	}
 	@Bean
 	public CommandLineRunner testModelLayer(IStudentRepo studRepo, 
-			IProfessorRepo profRepo, IGradeRepo grRepo, ICourseRepo courseRepo)
+			IProfessorRepo profRepo, IGradeRepo grRepo, ICourseRepo courseRepo ,
+			IMyAuthorityRepo authRepo, IMyUserRepo userRepo)
 	{
 		return new CommandLineRunner() {
 			
@@ -67,6 +74,24 @@ public class Seminar2Application {
 				Grade g6 = new Grade(7, s3, c2);//Sintija nopelnīja 7 Datubāzēs II
 				Grade g7 = new Grade(5, s3, c3);//Sintija nopelnīja 5 Webteh
 				grRepo.saveAll(Arrays.asList(g1, g2, g3, g4, g5, g6, g7));
+				
+				
+				MyAuthority auth1 = new MyAuthority("USER");
+				authRepo.save(auth1);
+				
+				MyAuthority auth2 = new MyAuthority("ADMIN");
+				authRepo.save(auth2);	
+				
+				PasswordEncoder encoder = PasswordEncoderFactories.createDelegatingPasswordEncoder();
+				
+				MyUser u1 = new MyUser("karina", encoder.encode("123"));
+				userRepo.save(u1);
+				
+				MyUser u2 = new MyUser("janis", encoder.encode("321"));
+				userRepo.save(u2);			
+				
+				//TODO izveidot sasaisti starp MyAuthority un MyUser klasēm 
+				
 			}
 		};
 	}
