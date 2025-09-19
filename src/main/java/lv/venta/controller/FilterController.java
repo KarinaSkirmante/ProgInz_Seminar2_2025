@@ -11,7 +11,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import lv.venta.model.Course;
 import lv.venta.model.Grade;
+import lv.venta.model.Professor;
 import lv.venta.model.Student;
+import lv.venta.model.enums.Degree;
 import lv.venta.service.IFilterService;
 
 @Controller
@@ -100,5 +102,19 @@ public class FilterController {
 		}
 	}
 	
+	@GetMapping("/professors/degree/phd")//localhost:8080/filter/professors/degree/phd
+	public String getControllerGetProfessorsWithPHD(Model model) {
+		try
+		{
+		ArrayList<Professor> professorWithPHD = filtService.selectAllProfessorsByDegree(Degree.doktora);
+		model.addAttribute("professors", professorWithPHD);
+		return "show-all-professors-page";
+		
+		}
+		catch (Exception e) {
+			model.addAttribute("package", e.getMessage());
+			return "show-error-page";//parādīt show-error-page.html lapu, kura būs kļudas ziņojums
+		}
+	}
 	
 }

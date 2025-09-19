@@ -5,8 +5,10 @@ import java.util.ArrayList;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import lv.venta.model.Course;
 import lv.venta.model.Professor;
 import lv.venta.model.enums.Degree;
+import lv.venta.repo.ICourseRepo;
 import lv.venta.repo.IProfessorRepo;
 import lv.venta.service.ICRUDProfessorService;
 
@@ -16,6 +18,9 @@ public class CRUDProfessorServiceImpl implements ICRUDProfessorService{
 	//TODO uztaisīt arī CRUD servisus priekš Student, Grade un Course
 	@Autowired
 	private IProfessorRepo profRepo;
+	
+	@Autowired
+	private ICourseRepo courseRepo;
 	
 	@Override
 	public ArrayList<Professor> retrieveAll() throws Exception {
@@ -47,6 +52,13 @@ public class CRUDProfessorServiceImpl implements ICRUDProfessorService{
 	public void deleteById(int id) throws Exception {
 		//TODO atsaistēt profesoru no kursiem, kam tas ir piesaistīts
 		Professor professorForDelete = retreiveById(id);
+		ArrayList<Course> coursesForProfessor = courseRepo.findByProfessorPid(id);
+		
+		for(Course tempC: coursesForProfessor) {
+			tempC.setProfessor(null);//noņem to profesoru, kuru dzēšam ārā
+			courseRepo.save(tempC);
+		}
+		
 		profRepo.delete(professorForDelete);
 	
 	}

@@ -7,7 +7,9 @@ import org.springframework.stereotype.Service;
 
 import lv.venta.model.Course;
 import lv.venta.model.Grade;
+import lv.venta.model.Professor;
 import lv.venta.model.Student;
+import lv.venta.model.enums.Degree;
 import lv.venta.repo.ICourseRepo;
 import lv.venta.repo.IGradeRepo;
 import lv.venta.repo.IProfessorRepo;
@@ -111,6 +113,16 @@ public class FilterServiceImpl implements IFilterService {
 		ArrayList<Student> result = studRepo.findByGradesGrvalueLessThan(4);
 		if(result.isEmpty()) {
 			throw new Exception("Datubāze nav neviens stuents ar nesekmīgu atzīmi");
+		}
+		
+		return result;
+	}
+
+	@Override
+	public ArrayList<Professor> selectAllProfessorsByDegree(Degree degree) throws Exception {
+		ArrayList<Professor> result = profRepo.findByDegree(degree);
+		if(result.isEmpty()) {
+			throw new Exception("Datubāze nav neviens professors ar " + degree + " grādu");
 		}
 		
 		return result;
