@@ -5,6 +5,8 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Pattern;
@@ -39,10 +41,15 @@ public class MyUser {
 	@Column(name = "Password")
 	//nav nepieciešams validēt, jo ta tiks glabāta jau enkodēta veidā
 	private String password;
+	
+	@ManyToOne
+	@JoinColumn(name = "AId")
+	private MyAuthority authority;
 
-	public MyUser(String username, String password) {
-		this.username = username;
-		this.password = password;
+	public MyUser(String username, String password, MyAuthority autority) {
+		setUsername(username);
+		setPassword(password);
+		setAuthority(autority);
 	}
 	
 	

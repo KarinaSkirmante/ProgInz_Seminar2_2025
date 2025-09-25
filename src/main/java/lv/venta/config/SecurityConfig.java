@@ -42,6 +42,8 @@ public class SecurityConfig {
 	public SecurityFilterChain configureUrlsSecurity(HttpSecurity http) throws Exception {
 	
 		http.authorizeHttpRequests(auth -> auth
+		.requestMatchers("/h2-console").permitAll()
+		.requestMatchers("/h2-console/**").permitAll()
 		.requestMatchers("/crud/professor/all").permitAll()//visiem piekļuve, arī neregistrētiem
 		.requestMatchers("/crud/professor/all/**").permitAll()//katra infdividuālā apsniedzeja lapu vara redzēt visi, arī nereģistreie
 		.requestMatchers("/crud/professor/create").hasAuthority("ADMIN")//izveidot professoru lapai var piekļut tikai admin
@@ -58,6 +60,7 @@ public class SecurityConfig {
 		
 		http.csrf(auth -> auth.disable());
 		
+		http.headers(frame->frame.frameOptions(option->option.disable()));
 		return http.build();
 	
 	

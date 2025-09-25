@@ -84,13 +84,15 @@ public class Seminar2Application {
 				
 				PasswordEncoder encoder = PasswordEncoderFactories.createDelegatingPasswordEncoder();
 				
-				MyUser u1 = new MyUser("karina", encoder.encode("123"));
+				MyUser u1 = new MyUser("karina", encoder.encode("123"), auth2); //ADMIN authority
 				userRepo.save(u1);
 				
-				MyUser u2 = new MyUser("janis", encoder.encode("321"));
-				userRepo.save(u2);			
+				MyUser u2 = new MyUser("janis", encoder.encode("321"), auth1);//USER authority
+				userRepo.save(u2);	
 				
-				//TODO izveidot sasaisti starp MyAuthority un MyUser klasēm 
+				MyUser u3 = new MyUser("anna", encoder.encode("987"), auth1);//USER authority
+				userRepo.save(u3);
+				 
 				
 			}
 		};
