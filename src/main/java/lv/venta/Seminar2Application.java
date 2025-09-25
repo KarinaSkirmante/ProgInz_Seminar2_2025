@@ -76,21 +76,24 @@ public class Seminar2Application {
 				grRepo.saveAll(Arrays.asList(g1, g2, g3, g4, g5, g6, g7));
 				
 				
-				MyAuthority auth1 = new MyAuthority("USER");
+				MyAuthority auth1 = new MyAuthority("USER_PROF");
 				authRepo.save(auth1);
 				
 				MyAuthority auth2 = new MyAuthority("ADMIN");
 				authRepo.save(auth2);	
+				
+				MyAuthority auth3 = new MyAuthority("USER_STUD");
+				authRepo.save(auth3);
 				
 				PasswordEncoder encoder = PasswordEncoderFactories.createDelegatingPasswordEncoder();
 				
 				MyUser u1 = new MyUser("karina", encoder.encode("123"), auth2); //ADMIN authority
 				userRepo.save(u1);
 				
-				MyUser u2 = new MyUser("janis", encoder.encode("321"), auth1);//USER authority
+				MyUser u2 = new MyUser("janis", encoder.encode("321"), auth1);//USER_PROF authority
 				userRepo.save(u2);	
 				
-				MyUser u3 = new MyUser("anna", encoder.encode("987"), auth1);//USER authority
+				MyUser u3 = new MyUser("anna", encoder.encode("987"), auth3);//USER_STUD authority
 				userRepo.save(u3);
 				 
 				

@@ -3,6 +3,7 @@ package lv.venta.config;
 import org.springframework.boot.autoconfigure.security.servlet.SecurityFilterAutoConfiguration;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.core.userdetails.User;
@@ -13,11 +14,14 @@ import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 import org.springframework.security.provisioning.UserDetailsManager;
 import org.springframework.security.web.SecurityFilterChain;
 
+import lv.venta.service.impl.MyUserDetailsManagerServiceImpl;
+
 @Configuration
 @EnableWebSecurity
 public class SecurityConfig {
 	
-	@Bean
+	//piemērs ar kodā iekodētiem lietotājiem
+	/*@Bean
 	public UserDetailsManager createSomeUsers() {
 		
 		PasswordEncoder passEncoder = PasswordEncoderFactories.createDelegatingPasswordEncoder();
@@ -36,6 +40,27 @@ public class SecurityConfig {
 		return manager;
 	
 	}
+	*/
+	
+	//piemērs ar lietotājiem no datubāzes
+	@Bean
+	public MyUserDetailsManagerServiceImpl loadMyUserDetailsManager() {
+		return new MyUserDetailsManagerServiceImpl();
+	}
+	
+	@Bean
+	public DaoAuthenticationProvider loadDaoAuthProvider() {
+		PasswordEncoder passEncoder = PasswordEncoderFactories.createDelegatingPasswordEncoder();
+		MyUserDetailsManagerServiceImpl service =  loadMyUserDetailsManager();
+		
+		DaoAuthenticationProvider provider = new DaoAuthenticationProvider();
+		provider.setPasswordEncoder(passEncoder);
+		provider.setUserDetailsService(service);
+		
+		return provider;	
+		
+	}
+	
 	
 	
 	@Bean
