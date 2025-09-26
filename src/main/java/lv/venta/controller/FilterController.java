@@ -3,11 +3,14 @@ package lv.venta.controller;
 import java.util.ArrayList;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatusCode;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 import lv.venta.model.Course;
 import lv.venta.model.Grade;
@@ -16,7 +19,7 @@ import lv.venta.model.Student;
 import lv.venta.model.enums.Degree;
 import lv.venta.service.IFilterService;
 
-@Controller
+@RestController
 @RequestMapping("/filter")
 public class FilterController {
 
@@ -24,19 +27,22 @@ public class FilterController {
 	private IFilterService filtService;
 	
 	@GetMapping("/grades/student/{id}")//localhost:8080/filter/grades/student/1
-	public String getControllerGetAllGradesForStudent(@PathVariable (name = "id") int id, Model model)
+	public ResponseEntity<?> getControllerGetAllGradesForStudent(
+			@PathVariable (name = "id") int id)
 	{
 		try
 		{
 			ArrayList<Grade> filteredGrades = filtService.selectGradesByStudentId(id);
-			model.addAttribute("package", filteredGrades);
-			return "show-grades-page";//parādīs show-grades-page.html lapu ar izfiltrētām atzīmēm
+			ResponseEntity<ArrayList<Grade>> response = 
+					new ResponseEntity<ArrayList<Grade>>(filteredGrades, HttpStatusCode.valueOf(200));
+			return response;
 		}catch (Exception e) {
-			model.addAttribute("package", e.getMessage());
-			return "show-error-page";//parādīt show-error-page.html lapu, kura būs kļudas ziņojums
+			ResponseEntity<String> response =
+					new ResponseEntity<String>(e.getMessage(), HttpStatusCode.valueOf(500));
+			return response;
 		}
 	}
-
+//TODO rediģēt pāŗejās kontrolieru funkcijas uz ResponseEntity
 	@GetMapping("/courses/student/{id}")//localhost:8080/filter/courses/student/1
 	public String getControllerGetAllCoursesForStudent(@PathVariable(name = "id") int id, Model model)
 	{
