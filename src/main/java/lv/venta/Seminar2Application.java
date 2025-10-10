@@ -24,7 +24,7 @@ public class Seminar2Application {
 	public static void main(String[] args) {
 		SpringApplication.run(Seminar2Application.class, args);
 	}
-	@Bean
+	//@Bean
 	public CommandLineRunner testModelLayer(IStudentRepo studRepo, 
 			IProfessorRepo profRepo, IGradeRepo grRepo, ICourseRepo courseRepo)
 	{
