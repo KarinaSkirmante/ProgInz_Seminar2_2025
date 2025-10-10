@@ -9,6 +9,7 @@ import org.openpdf.text.Document;
 import org.openpdf.text.Element;
 import org.openpdf.text.Font;
 import org.openpdf.text.FontFactory;
+import org.openpdf.text.Image;
 import org.openpdf.text.Paragraph;
 import org.openpdf.text.pdf.PdfWriter;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -76,11 +77,17 @@ public class PDFCreatorServiceImpl implements IPDFCreatorService{
 				PdfWriter writer = PdfWriter.getInstance(document, 
 						new FileOutputStream(certicateNo + "_" + studentNameAndSurname+".pdf"));
 				
+				document.open();
+				
+				Image image = Image.getInstance("/home/karina.krinkele@vea.lv/git/ProgInz_Seminar2_2025/src/main/resources/vea_logo.png");
+				
+				document.add(image);
+				
 				Paragraph p1 = new Paragraph("TestDevLab Skola",  
 						FontFactory.getFont(FontFactory.COURIER, 18));
 				
 				
-				document.open();
+				
 				p1.setAlignment(Element.ALIGN_CENTER);
 				document.add(p1);
 				
@@ -96,6 +103,8 @@ public class PDFCreatorServiceImpl implements IPDFCreatorService{
 				
 				
 				document.close();
+				
+				
 			}
 		}
 		
