@@ -21,8 +21,7 @@ public class EmailSendingServiceImpl {
 
 		/*
 		 * SimpleMailMessage msg = new SimpleMailMessage(); msg.setFrom(fromEmail);
-		 * msg.setTo(toEmail); msg.setSubject(subject); msg.setText(text); //TODO
-		 * pieveinot epastam attachemnt
+		 * msg.setTo(toEmail); msg.setSubject(subject); msg.setText(text);
 		 */
 
 		MimeMessage message = mailSender.createMimeMessage();
