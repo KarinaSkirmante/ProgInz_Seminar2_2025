@@ -114,7 +114,8 @@ public class PDFCreatorServiceImpl implements IPDFCreatorService{
 						"karina.krinkele@gmail.com", "TestDevSchool sertifikāts", 
 						"Sveiki!\n\n Apsveicu ar nokārtu kursu! "
 						+ "Sertifikātu lūdzu skatīt pielikumā!\n\n Ar cieņu, \nKarina", 
-						new File("/home/karina.krinkele@vea.lv/git/ProgInz_Seminar2_2025/" + certicateNo + "_" + studentNameAndSurname +".pdf"));
+						new File("/home/karina.krinkele@vea.lv/git/ProgInz_Seminar2_2025/" 
+						+ certicateNo + "_" + studentNameAndSurname +".pdf"));
 				
 				
 			}
