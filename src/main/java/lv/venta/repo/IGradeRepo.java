@@ -15,4 +15,7 @@ public interface IGradeRepo extends CrudRepository<Grade, Integer> {
 	@Query(nativeQuery = true, value = "SELECT avg(grvalue) FROM grade_table WHERE cid = ?1;")
 	public abstract float calculateAVGgradeInCourse(int id);
 
+
+	public abstract Grade findByStudentStidAndCourseCid(int studId, int courseId);
+
 }
