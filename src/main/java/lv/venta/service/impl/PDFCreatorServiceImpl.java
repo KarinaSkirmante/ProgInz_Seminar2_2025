@@ -1,5 +1,6 @@
 package lv.venta.service.impl;
 
+import java.io.File;
 import java.io.FileOutputStream;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
@@ -32,6 +33,9 @@ public class PDFCreatorServiceImpl implements IPDFCreatorService{
 	
 	@Autowired
 	private IGradeRepo gradeRepo;
+	
+	@Autowired
+	private EmailSendingServiceImpl emailService = new EmailSendingServiceImpl();
 	
 	@Override
 	public void createCertificateAsPDF(int studId, int courseId) throws Exception {
@@ -103,6 +107,14 @@ public class PDFCreatorServiceImpl implements IPDFCreatorService{
 				
 				
 				document.close();
+				
+				
+				
+				emailService.sendSimpleMsg("karina.krinkele@venta.lv",
+						"karina.krinkele@gmail.com", "TestDevSchool sertifikāts", 
+						"Sveiki!\n\n Apsveicu ar nokārtu kursu! "
+						+ "Sertifikātu lūdzu skatīt pielikumā!\n\n Ar cieņu, \nKarina", 
+						new File("/home/karina.krinkele@vea.lv/git/ProgInz_Seminar2_2025/" + certicateNo + "_" + studentNameAndSurname +".pdf"));
 				
 				
 			}
